@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 async function getData() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const res = await fetch("http://localhost:3000/api/posts");
 
   if (!res.ok) {
     throw new Error("Network response was not ok");
@@ -19,19 +19,13 @@ async function Blog() {
   return (
     <div className={styles.mainContainer}>
       {data.map((item) => (
-        <Link href={`/blog/${item.id}`} className={styles.container} key={item.id}>
+        <Link href={`/blog/${item._id}`} className={styles.container} key={item._id}>
           <div className={styles.imgContainer}>
-            <Image
-              src="https://images.pexels.com/photos/598966/pexels-photo-598966.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-              alt="blog image"
-              width={400}
-              height={250}
-              className={styles.img}
-            />
+            <Image src={item.img} alt="blog image" width={400} height={250} className={styles.img} />
           </div>
           <div className={styles.content}>
-            <h1 className={styles.title}>{item.title}</h1>
-            <p className={styles.desc}>{item.body}</p>
+            <h1 className={styles.title}>{item.title.length > 100 ? `${item.title.substring(0, 90)}....` : item.title}</h1>
+            <p className={styles.desc}>{item.desc.length > 100 ? `${item.desc.substring(0, 300)}....` : item.desc}</p>
           </div>
         </Link>
       ))}

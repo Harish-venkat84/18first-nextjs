@@ -5,6 +5,7 @@ import Link from "next/link";
 import styles from "./navbar.module.css";
 import DarkModeToogle from "../darkModeToggle/DarkModeToogle";
 import { ThemeContext } from "@/context/ThemeContext";
+import { signOut, useSession } from "next-auth/react";
 
 const links = [
   {
@@ -41,6 +42,7 @@ const links = [
 
 function Navbar() {
   const { routePath, setRoutePath } = useContext(ThemeContext);
+  const session = useSession();
 
   // useEffect(() => {
   //   setRoutePath(localStorage.getItem("routePath") || "/");
@@ -67,7 +69,12 @@ function Navbar() {
             {link.title}
           </Link>
         ))}
-        <button className={styles.logout}>Logout</button>
+
+        {session.status === "authenticated" && (
+          <button className={styles.logout} onClick={signOut}>
+            Logout
+          </button>
+        )}
       </div>
     </div>
   );
