@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 async function getData() {
-  const res = await fetch("http://localhost:3000/api/posts");
+  const res = await fetch("/api/posts");
 
   if (!res.ok) {
     throw new Error("Network response was not ok");
