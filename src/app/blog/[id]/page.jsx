@@ -4,13 +4,17 @@ import styles from "./page.module.css";
 import { notFound } from "next/navigation";
 
 async function getData(id) {
-  const res = await fetch(`http://localhost:3000/api/posts/${id}`);
+  try {
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/posts/${id}`);
 
-  if (!res.ok) {
-    return notFound();
+    if (!res.ok) {
+      return notFound();
+    }
+
+    return res.json();
+  } catch (error) {
+    return undefined;
   }
-
-  return res.json();
 }
 
 export async function generateMetadata({ params }) {
@@ -26,6 +30,10 @@ export async function generateMetadata({ params }) {
 async function BolgPost({ params }) {
   const { id } = await params;
   const data = await getData(id);
+
+  if (data === undefined) {
+    return <h1>Data not notFound</h1>;
+  }
 
   return (
     <div className={styles.container}>

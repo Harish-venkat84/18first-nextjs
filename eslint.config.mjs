@@ -14,7 +14,7 @@ const eslintConfig = [
   {
     parser: "@babel/eslint-parser",
     parserOptions: {
-      ecmaVersion: 2021,
+      ecmaVersion: 2025,
       sourceType: "module",
     },
   },

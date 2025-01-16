@@ -23,7 +23,6 @@ export const POST = async (request) => {
   try {
     await connect();
     await newPost.save();
-    console.log("=========> saved");
     return NextResponse.json({ message: "post created successfully" }, { status: 201 });
   } catch (error) {
     return NextResponse.json({ error: error.message || "An unknown error occurred" }, { status: 500 });
