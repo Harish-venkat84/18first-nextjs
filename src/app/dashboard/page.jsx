@@ -8,6 +8,30 @@ import Image from "next/image";
 import { ThemeContext } from "@/context/ThemeContext";
 import Loader from "@/components/loader/Loader";
 
+// async function createGoogleUser(session) {
+//   try {
+//     const res = await fetch("/api/auth/register", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({
+//         name: session.user.name,
+//         email: session.user.email,
+//         password: "undefined",
+//         googleUserId: session.user.id,
+//         googleProfileImage: session.user.image,
+//       }),
+//     });
+
+//     const data = await res.json();
+
+//     console.log(await data);
+
+//     if (res.status !== 201) {
+//       console.log("=======>unable to create google user");
+//     }
+//   } catch (error) {}
+// }
+
 function Dashboard() {
   const { data: session, status } = useSession();
 

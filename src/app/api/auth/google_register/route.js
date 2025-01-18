@@ -14,22 +14,14 @@ export const POST = async (request) => {
 
   const existingUser = await User.findOne({ email });
   if (existingUser) {
-    return NextResponse.json(
-      { error: "Email already in use" },
-      { status: 409 } // Conflict status code
-    );
-  }
-
-  let hashedPassword;
-  if (password !== undefined) {
-    hashedPassword = await bcrypt.hash(password, 5);
+    return NextResponse.json({ message: "user login successfully" }, { status: 201 });
   }
 
   try {
     const newUser = new User({
       name,
       email,
-      password: hashedPassword,
+      password,
       googleUserId,
       googleProfileImage,
     });

@@ -18,8 +18,6 @@ async function getData() {
 async function Blog() {
   const data = await getData();
 
-  console.log("============>", data);
-
   if (data === undefined) {
     return <h1>Data not found</h1>;
   }

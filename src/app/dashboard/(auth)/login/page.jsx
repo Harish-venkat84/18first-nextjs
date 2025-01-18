@@ -4,12 +4,14 @@ import styles from "./page.module.css";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Loader from "@/components/loader/Loader";
+import createGoogleUser from "@/utils/createGoogleUsers";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [userSession, setUserSession] = useState(true);
 
   const { data: session, status } = useSession();
 
@@ -19,19 +21,21 @@ function Login() {
 
   useEffect(() => {
     if (status === "authenticated") {
+      if (!JSON.parse(sessionStorage.getItem("userStatus"))) {
+        createGoogleUser(session, status);
+      }
+
+      sessionStorage.setItem("userStatus", "true");
+      setUserSession(JSON.parse(sessionStorage.getItem("userStatus")));
       router.push("/dashboard");
     }
-  }, [status, router]);
 
-  useEffect(() => {
-    function loadingStatus() {
-      if (loading) {
-        return <Loader />;
-      }
+    if (status === "unauthenticated") {
+      sessionStorage.setItem("userStatus", "false");
+      setUserSession(JSON.parse(sessionStorage.getItem("userStatus")));
+      setLoading(false);
     }
-
-    loadingStatus();
-  }, [loading]);
+  }, [status, loading]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,8 +44,8 @@ function Login() {
 
     try {
       const result = await signIn("credentials", {
-        email: email,
-        password: password,
+        email: email.trim(),
+        password: password.trim(),
         redirect: false,
       });
 
@@ -61,17 +65,18 @@ function Login() {
   const handleGoogleSignIn = async () => {
     setLoading(true);
     setError("");
-
     try {
-      await signIn("google", { callbackUrl });
+      await signIn("google", {});
+      sessionStorage.setItem("userStatus", "false");
+      setUserSession(JSON.parse(sessionStorage.getItem("userStatus")));
     } catch (err) {
       setError("Google sign-in failed. Please try again.");
     } finally {
-      setLoading(false);
+      // setLoading(false);
     }
   };
 
-  if (status === "loading") {
+  if (status === "loading" || userSession) {
     return <Loader />;
   }
 

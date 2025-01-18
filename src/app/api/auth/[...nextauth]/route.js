@@ -49,22 +49,31 @@ const handler = NextAuth({
       },
     }),
   ],
-  // callbacks: {
-  //   async jwt({ token, user }) {
-  //     if (user) {
-  //       token.id = user.id;
-  //     }
-  //     return token;
-  //   },
-  //   async session({ session, token }) {
-  //     if (token) {
-  //       session.user.id = token.id;
-  //     }
-  //     return session;
-  //   },
-  // },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (token) {
+        session.user.id = token.id;
+      }
+      return session;
+    },
+    async signIn({ account, profile }) {
+      if (account.provider === "google") {
+        return profile.email_verified && profile.email.endsWith("@gmail.com");
+      }
+      return true; // Do different verification for other providers that don't have `email_verified`
+    },
+  },
   pages: {
+    signIn: "/dashboard/login",
+    signOut: "/dashboard/login",
     error: "/dashboard/login",
+    newUser: "/dashboard/register",
   },
   secret: process.env.NEXTAUTH_SECRET,
 });

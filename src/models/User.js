@@ -13,7 +13,12 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true,
+    },
+    googleUserId: {
+      type: String,
+    },
+    googleProfileImage: {
+      type: String,
     },
   },
   { timestamps: true }

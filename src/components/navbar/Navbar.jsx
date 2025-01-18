@@ -44,9 +44,9 @@ function Navbar() {
   const { routePath, setRoutePath } = useContext(ThemeContext);
   const session = useSession();
 
-  // useEffect(() => {
-  //   setRoutePath(localStorage.getItem("routePath") || "/");
-  // }, []);
+  useEffect(() => {
+    setRoutePath(localStorage.getItem("routePath") || "/");
+  }, []);
 
   return (
     <div className={styles.container}>
