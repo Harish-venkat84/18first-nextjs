@@ -5,7 +5,7 @@ import Link from "next/link";
 
 async function getData() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_AUTH_URL}/api/posts`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/posts`);
     if (!res.ok) {
       throw new Error("Network response was not ok");
     }
