@@ -4,7 +4,7 @@ export async function getData() {
   try {
     const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-    const { data, mutate, isLoading, error } = useSWR(`${process.env.NEXTAUTH_URL}/api/posts`, fetcher);
+    const { data, mutate, isLoading, error } = useSWR(`${process.env.NEXT_PUBLIC_AUTH_URL}/api/posts`, fetcher);
 
     return data;
   } catch (error) {
