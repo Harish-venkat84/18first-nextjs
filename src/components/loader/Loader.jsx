@@ -1,5 +1,5 @@
 import React from "react";
-import { BeatLoader, PacmanLoader } from "react-spinners";
+import { BeatLoader, ClipLoader, PacmanLoader } from "react-spinners";
 import styles from "./loader.module.css";
 
 function Loader() {
@@ -10,4 +10,14 @@ function Loader() {
   );
 }
 
+function Spinner() {
+  return (
+    <div className={styles.container}>
+      <ClipLoader color="white" size={20} />
+    </div>
+  );
+}
+
 export default Loader;
+
+export { Spinner };

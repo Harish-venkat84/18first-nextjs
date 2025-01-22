@@ -4,10 +4,11 @@ import styles from "./page.module.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
-import Loader from "@/components/loader/Loader";
+import Loader, { Spinner } from "@/components/loader/Loader";
 
 function Register() {
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { data: session, status } = useSession();
 
@@ -19,6 +20,7 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const name = e.target[0].value.trim();
     const email = e.target[1].value.trim();
     const password = e.target[2].value.trim();
@@ -55,6 +57,8 @@ function Register() {
       }
     } catch (err) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -68,7 +72,7 @@ function Register() {
         <input type="text" placeholder="username" className={styles.input} required />
         <input type="email" placeholder="email" className={styles.input} required />
         <input type="password" placeholder="password" className={styles.input} required />
-        <button className={styles.button}>Register</button>
+        <button className={styles.button}>{loading ? <Spinner /> : "Register"}</button>
       </form>
       {error && "something went wrong!"}
       <Link href="/dashboard/login">

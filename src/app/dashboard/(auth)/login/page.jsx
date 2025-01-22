@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import Loader from "@/components/loader/Loader";
+import Loader, { Spinner } from "@/components/loader/Loader";
 import createGoogleUser from "@/utils/createGoogleUsers";
 
 function Login() {
@@ -11,6 +11,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [googleLoader, setGoogleLoader] = useState(false);
   const [userSession, setUserSession] = useState(true);
 
   const { data: session, status } = useSession();
@@ -20,6 +21,12 @@ function Login() {
   const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
 
   useEffect(() => {
+    if (status === "unauthenticated") {
+      sessionStorage.setItem("userStatus", "false");
+      setUserSession(JSON.parse(sessionStorage.getItem("userStatus")));
+      setLoading(false);
+    }
+
     if (status === "authenticated") {
       if (!JSON.parse(sessionStorage.getItem("userStatus"))) {
         createGoogleUser(session, status);
@@ -29,13 +36,7 @@ function Login() {
       setUserSession(JSON.parse(sessionStorage.getItem("userStatus")));
       router.push("/dashboard");
     }
-
-    if (status === "unauthenticated") {
-      sessionStorage.setItem("userStatus", "false");
-      setUserSession(JSON.parse(sessionStorage.getItem("userStatus")));
-      setLoading(false);
-    }
-  }, [status, loading]);
+  }, [status, userSession]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,16 +64,16 @@ function Login() {
   };
 
   const handleGoogleSignIn = async () => {
-    setLoading(true);
+    setGoogleLoader(true);
     setError("");
     try {
       await signIn("google", {});
-      sessionStorage.setItem("userStatus", "false");
-      setUserSession(JSON.parse(sessionStorage.getItem("userStatus")));
+      sessionStorage.setItem("userStatus", "true");
     } catch (err) {
       setError("Google sign-in failed. Please try again.");
     } finally {
-      // setLoading(false);
+      setGoogleLoader(false);
+      setUserSession(JSON.parse(sessionStorage.getItem("userStatus")));
     }
   };
 
@@ -107,12 +108,12 @@ function Login() {
         {error && <div className={styles.error}>{error}</div>}
 
         <button className={styles.button} disabled={loading}>
-          {loading ? "Logging in..." : "Login"}
+          {loading ? <Spinner /> : "Login"}
         </button>
       </form>
 
-      <button className={styles.google} onClick={handleGoogleSignIn} disabled={loading}>
-        {loading ? "Connecting..." : "Login with Google"}
+      <button className={styles.google} onClick={handleGoogleSignIn} disabled={googleLoader}>
+        {googleLoader ? <Spinner /> : "Login with Google"}
       </button>
       <p className={styles.reister}>
         Click here to
