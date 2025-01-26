@@ -20,7 +20,7 @@ const links = [
   },
   {
     id: 3,
-    title: "Bolg",
+    title: "Blog",
     url: "/blog",
   },
   {
