@@ -51,7 +51,7 @@ function Navbar() {
   return (
     <div className={styles.container}>
       <Link href="/" className={styles.logo}>
-        Lamamia
+        Blog Posts
       </Link>
       <div className={styles.links}>
         <DarkModeToogle />
@@ -60,7 +60,7 @@ function Navbar() {
             key={link.id}
             href={link.url}
             className={styles.link}
-            style={routePath === link.url ? { color: "#53c28b", opacity: "1" } : { opacity: "0.7" }}
+            style={routePath === link.url ? { color: "#dc5656", opacity: "1" } : { opacity: "0.7" }}
             onClick={() => {
               setRoutePath(link.url);
               localStorage.setItem("routePath", link.url);

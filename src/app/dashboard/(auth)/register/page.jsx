@@ -76,7 +76,7 @@ function Register() {
       </form>
       {error && "something went wrong!"}
       <Link href="/dashboard/login">
-        <span style={{ color: "#53c28b", textDecorationLine: "underline" }}>Login</span>
+        <span style={{ color: "#dc5656", textDecorationLine: "underline" }}>Login</span>
         {" with an existing account"}
       </Link>
     </div>

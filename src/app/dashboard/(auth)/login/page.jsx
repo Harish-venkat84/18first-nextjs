@@ -5,6 +5,13 @@ import { signIn, useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Loader, { Spinner } from "@/components/loader/Loader";
 import createGoogleUser from "@/utils/createGoogleUsers";
+import Image from "next/image";
+import googleIcon from "@/../public/googleIcon.png";
+import loginImage from "@/../public/loginImage.png";
+import image1 from "@/../public/image1.png";
+import image2 from "@/../public/image2.png";
+import image3 from "@/../public/image3.png";
+import image4 from "@/../public/4.png";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -82,45 +89,67 @@ function Login() {
   }
 
   return (
-    <div className={styles.container}>
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          className={styles.input}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          disabled={loading}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          className={styles.input}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          disabled={loading}
-        />
+    <div>
+      <div className={styles.imagesFade}>
+        <Image src={image1} alt="loginImage" width={200} height={200} className={styles.image1}></Image>
+        <Image src={image2} alt="loginImage" width={200} height={200} className={styles.image2}></Image>
+        <Image src={image3} alt="loginImage" width={200} height={200} className={styles.image3}></Image>
+        <Image src={image4} alt="loginImage" width={50} height={50} className={styles.image4}></Image>
+      </div>
+      <div className={styles.container}>
+        <div className={styles.childContainer}>
+          <Image src={loginImage} alt="loginImage" width={430} height={480} className={styles.loginImg}></Image>
+          <h2 className={styles.title}>Welcome back</h2>
+          <p className={styles.desc}>Please enter your details</p>
+          <div className={styles.formBackground}>
+            <form className={styles.form} onSubmit={handleSubmit}>
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                className={styles.input}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                disabled={loading}
+              />
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                className={styles.input}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                disabled={loading}
+              />
 
-        {error && <div className={styles.error}>{error}</div>}
+              {error && <div className={styles.error}>{error}</div>}
 
-        <button className={styles.button} disabled={loading}>
-          {loading ? <Spinner /> : "Login"}
-        </button>
-      </form>
+              <button className={styles.button} disabled={loading}>
+                {loading ? <Spinner /> : "Login"}
+              </button>
+            </form>
 
-      <button className={styles.google} onClick={handleGoogleSignIn} disabled={googleLoader}>
-        {googleLoader ? <Spinner /> : "Login with Google"}
-      </button>
-      <p className={styles.reister}>
-        Click here to
-        <span onClick={() => router.push("/dashboard/register")} style={{ color: "#53c28b", cursor: "pointer" }}>
-          {" Register"}
-        </span>
-      </p>
+            <div className={styles.divider}>
+              <span>or</span>
+            </div>
+
+            <button className={styles.google} onClick={handleGoogleSignIn} disabled={googleLoader}>
+              <span>
+                <Image src={googleIcon} alt="Contact" width={20} height={20} className={styles.googleIcon}></Image>
+              </span>
+              <span className={styles.googleText}>{googleLoader ? <Spinner /> : "Login with Google"}</span>
+            </button>
+            <p className={styles.reister}>
+              Click here to
+              <span onClick={() => router.push("/dashboard/register")} style={{ color: "#dc5656", cursor: "pointer" }}>
+                {" Register"}
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

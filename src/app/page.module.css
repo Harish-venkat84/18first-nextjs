@@ -24,6 +24,8 @@
   height: 500px;
   object-fit: contain;
   animation: move 3s infinite ease alternate;
+  border: 3px solid #dc5656;
+  border-radius: 30px;
 }
 
 @keyframes move{

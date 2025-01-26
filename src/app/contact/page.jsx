@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./page.module.css";
 import Image from "next/image";
-import contactImg from "../../../public/contact.png";
+import contactImg from "../../../public/contact1.png";
 import Button from "@/components/buttons/Button";
 
 export const metadata = {

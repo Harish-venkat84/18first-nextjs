@@ -4,7 +4,7 @@
 
 .title{
     font-size: 60px;
-    margin-bottom: 100px;
+    margin-bottom: 10px;
     text-align: center;
 }
 
@@ -16,7 +16,7 @@
 
 .imgContainer{
     flex: 1;
-    height: 500px;
+    height: 600px;
     position: relative;
 }
 
@@ -27,7 +27,7 @@
 
 @keyframes move{
     from{
-        transform: translateY(-15px);
+        transform: translateY(-20px);
     }
     to{
         transform: translateY(0px) scale(1.03);

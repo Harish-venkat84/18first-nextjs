@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import Hero from "../../public/hero.png";
+import Hero from "../../public/hero1.png";
 import TypingAnimation from "@/components/typeAnimation/TypingAnimation";
 import Button from "@/components/buttons/Button";
 

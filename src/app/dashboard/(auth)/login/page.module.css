@@ -3,10 +3,47 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    
 }
 
+.childContainer{
+    display: flex;
+    border: 2px solid #bbb;
+    border-radius: 11px;
+    box-shadow: 0px 0px 10px rgba(63, 18, 18, 0.3);
+    position: absolute;
+
+}
+
+.formBackground{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+}
+
+.loginImg{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.title{
+    position: absolute;
+    font-size: 30px;
+    padding: 10px 20px 0px;
+    color: #dc5656;
+}
+
+.desc{
+    color: black;
+    position: absolute;
+    padding-top: 50px;
+    padding-left: 25px;
+    font-weight: 400;
+}
+
+
 .reister{
-    margin: 20px;
+    margin-top: 20px;
 }
 
 .form{
@@ -31,7 +68,7 @@
     width: 300px;
     padding: 20px;
     cursor: pointer;
-    background-color: #53c28b;
+    background-color: #dc5656;
     border: none;
     border-radius: 5px;
     color: #eee;
@@ -42,9 +79,94 @@
     width: 300px;
     padding: 20px;
     cursor: pointer;
-    background-color: #474747;
+    background-color: #bd0b0b;
     border: none;
     border-radius: 5px;
     color: #eee;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.googleIcon{
+
+    margin-right: 10px;
+}
+
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 15px 0;
+    color: #bbb;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #ccc;
+    margin: 0 10px;
+}
+
+
+.imagesFade{
+    display: flex;
+    position: fixed;
+}
+
+.image1{
+
+    position: absolute;
+    bottom: 100px;
+    left: 30px;
+    animation: fadeInOut 3s infinite ease alternate;
+    animation-delay: 1s;
+
+
+}
+
+.image2{
+
+    position: absolute;
+    left: 1100px;
+    bottom: 100px;
+    animation: fadeInOut 3s infinite ease alternate;
+    animation-delay: 3s;
+
+
+}
+.image3{
+
+    position: absolute;
+    top: 20px;
+    animation: fadeInOut 3s infinite ease alternate;
+    animation-delay: 3s;
+
+
+}
+.image4{
+
+    position: absolute;
+    left: 1200px;
+    top: 40px;
+    bottom: 300px;
+    animation: fadeInOut 3s infinite ease alternate;
+    animation-delay: 1s;
+
+
+    
+
+}
+
+@keyframes fadeInOut {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
 }

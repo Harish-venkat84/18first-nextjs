@@ -1,12 +1,12 @@
 .container{
     padding: 20px;
     cursor: pointer;
-    background-color: #53c28b;
+    background-color: #dc5656;
     border: none;
     border-radius: 5px;
     width: max-content;
     color: white;
-    opacity: 0.8;
+    opacity: 0.9;
   }
   
 .container:hover{

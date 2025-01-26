@@ -8,12 +8,13 @@
 
 .selectTitle{
     margin: 20px 0;
-    color: #53c28b;
+    color: #dc5656;
 }
 
 .items{
     display: flex;
     gap: 50px;
+    min-height: 400px;
 }
 
 .item{
@@ -46,9 +47,29 @@
 }
 
 .item:hover{
-    border: 5px solid #53c28b;
+    /* margin-top: 2px; */
+    animation: move 0.5s infinite ease alternate;
+    border: 5px solid #dc5656;
 }
 
 .item:hover .title{
-    color: #53c28b;
+    color: #dc5656;
+}
+
+@keyframes move{
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-1deg);
+    }
+    50% {
+        transform: rotate(1deg);
+    }
+    75% {
+        transform: rotate(-1deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
 }

@@ -14,7 +14,7 @@
 }
 
 .imgText{
-    background-color: #53c28b;
+    background-color: #dc5656;
     position: absolute;
     bottom: 20px;
     left: 20px;
@@ -24,7 +24,7 @@
 }
 
 .imgTitle, .imgDesc{
-    background-color: #53c28b;
+    background-color: #dc5656;
     color: white;
 }
 

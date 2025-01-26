@@ -5,7 +5,7 @@ import styles from "./loader.module.css";
 function Loader() {
   return (
     <div className={styles.container}>
-      <BeatLoader color="#53c28b" size={20} />
+      <BeatLoader color="#dc5656" size={20} />
     </div>
   );
 }
